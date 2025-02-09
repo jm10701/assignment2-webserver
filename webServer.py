@@ -15,7 +15,7 @@ def webServer(port=13331):
   while True:
     #Establish the connection
     
-    print('Ready to serve...')
+    #print('Ready to serve...')
     # Fill in start -are you accepting connections?
     connectionSocket, addr = serverSocket.accept()
     # Fill in end
@@ -54,7 +54,7 @@ def webServer(port=13331):
       #Send everything as one send command, do not send one line/item at a time!
 
       # Fill in start
-      connectionSocket.send(outputdata)
+      connectionSocket.sendall(outputdata)
       # Fill in end
 
       connectionSocket.close() #closing the connection socket
@@ -64,7 +64,7 @@ def webServer(port=13331):
       # Remember the format you used in the try: block!
       #Fill in start
       outputdata = b"HTTP/1.1 404 Not Found\r\n"
-      connectionSocket.send(outputdata)
+      connectionSocket.sendall(outputdata)
       #Fill in end
 
       #Close client socket
@@ -74,8 +74,8 @@ def webServer(port=13331):
 
   # Commenting out the below (some use it for local testing). It is not required for Gradescope, and some students have moved it erroneously in the While loop. 
   # DO NOT PLACE ANYWHERE ELSE AND DO NOT UNCOMMENT WHEN SUBMITTING, YOU ARE GONNA HAVE A BAD TIME
-  #serverSocket.close()
-  #sys.exit()  # Terminate the program after sending the corresponding data
+  # serverSocket.close()
+  # sys.exit()  # Terminate the program after sending the corresponding data
 
 if __name__ == "__main__":
   webServer(13331)
