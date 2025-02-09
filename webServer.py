@@ -40,6 +40,7 @@ def webServer(port=13331):
       #Content-Type is an example on how to send a header as bytes. There are more!
       outputdata = outputdata + b"Date: Sunday, 9 Feb 2025 16:31:00 GMT\r\n"
       outputdata = outputdata + b"Server: Socket Server (Windows)\r\n"
+      outputdata = outputdata + b"Connection: close\r\n"
       #outputdata = outputdata + b"Content-Length: \r\n"
       outputdata = outputdata + b"Content-Type: text/html; charset=UTF-8\r\n\r\n"
       #Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n" Refer to https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/TCPSockets.html
@@ -53,7 +54,7 @@ def webServer(port=13331):
       #Send everything as one send command, do not send one line/item at a time!
 
       # Fill in start
-      connectionSocket.sendall(outputdata)
+      connectionSocket.send(outputdata)
       # Fill in end
 
       connectionSocket.close() #closing the connection socket
@@ -63,7 +64,7 @@ def webServer(port=13331):
       # Remember the format you used in the try: block!
       #Fill in start
       outputdata = b"HTTP/1.1 404 Not Found\r\n"
-      connectionSocket.sendall(outputdata)
+      connectionSocket.send(outputdata)
       #Fill in end
 
       #Close client socket
