@@ -42,18 +42,19 @@ def webServer(port=13331):
       outputdata = outputdata + b"Server: Socket Server (Windows)\r\n"
       outputdata = outputdata + b"Connection: close\r\n"
       #outputdata = outputdata + b"Content-Length: \r\n"
-      outputdata = outputdata + b"Content-Type: text/html; charset=UTF-8\r\n\r\n"
+      outputdata = outputdata + b"Content-Type: text/html; charset=UTF-8\r\n"
       #Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n" Refer to https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/TCPSockets.html
       #Fill in end
-
+      htmlcontent = b""
       for i in f: #for line in file
       # Fill in start - append your html file contents
-        outputdata = outputdata + f.readline()
+        htmlcontent = htmlcontent + f.readline()
       # Fill in end
       #Send the content of the requested file to the client (don't forget the headers you created)!
       #Send everything as one send command, do not send one line/item at a time!
-
+      outputdata = outputdata + b"Content-Length: " + str(len(htmlcontent)).encode() + b"\r\n"
       # Fill in start
+      outputdata = outputdata + b"\r\n" + htmlcontent
       connectionSocket.sendall(outputdata)
       # Fill in end
 
