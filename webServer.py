@@ -15,7 +15,7 @@ def webServer(port=13331):
   while True:
     #Establish the connection
     
-    #print('Ready to serve...')
+    print('Ready to serve...')
     # Fill in start -are you accepting connections?
     connectionSocket, addr = serverSocket.accept()
     # Fill in end
@@ -48,7 +48,7 @@ def webServer(port=13331):
       htmlcontent = b""
       for i in f: #for line in file
       # Fill in start - append your html file contents
-        htmlcontent = htmlcontent + f.readline()
+        htmlcontent = htmlcontent + i
       # Fill in end
       #Send the content of the requested file to the client (don't forget the headers you created)!
       #Send everything as one send command, do not send one line/item at a time!
